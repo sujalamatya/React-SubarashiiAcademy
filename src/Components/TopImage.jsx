@@ -46,8 +46,8 @@ export default function TopImage() {
       </section>
 
       {/* Study in Japan Section */}
-      <section className=" px-6 bg-gray-50">
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <section className="py-16 px-6 bg-white">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <motion.div
             ref={ref}
             initial={{ opacity: 0, x: -100 }}
