@@ -22,7 +22,7 @@ export default function Navbar() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header className="fixed w-full z-50 shadow-md transition-all duration-300 ease-in-out">
+    <header className="fixed w-full z-50 transition-all duration-300 ease-in-out">
       <nav
         role="navigation"
         aria-label="Main Navigation"
