@@ -1,89 +1,109 @@
-import Logo from "../assets/LogoMain.jpg";
-import React from "react";
-import { useState, useEffect } from "react";
-import classNames from "classnames";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
-export default function Navbar(props) {
+import Logo from "../assets/LogoMain.jpg";
+import { FaBars, FaTimes, FaSearch } from "react-icons/fa";
+
+export default function Navbar() {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [topNavbar, setTopNavbar] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
-
-    if (currentScrollY < 100) {
-      setTopNavbar(true);
-    } else {
-      setTopNavbar(false);
-    }
-    if (currentScrollY > lastScrollY && currentScrollY > 100) {
-      setShowNavbar(false);
-    } else {
-      setShowNavbar(true);
-    }
-
+    setShowNavbar(!(currentScrollY > lastScrollY && currentScrollY > 100));
     setLastScrollY(currentScrollY);
   };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
   return (
-    <div>
+    <header className="fixed w-full z-50 transition-all duration-300 ease-in-out">
       <nav
-        className={`font-sans text-white hover:text-white-300 fixed w-full top-0 z-50 p-1 px-8 bg-transparent overflow-auto border-b border-solid border-gray-300 transition-all duration-200 ease-in-out ${
-          showNavbar
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 -translate-y-full"
+        role="navigation"
+        aria-label="Main Navigation"
+        className={`bg-white backdrop-blur-sm bg-opacity-80 transition-transform duration-300 ${
+          showNavbar ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-        />
-        <ul className="flex justify-around items-center list-none mt-4 p-0 font-medium">
-          {/* Logo Item */}
-          <li className="mt-0">
-            <img
-              src={Logo}
-              alt="logo"
-              className="h-14 w-35" // Adjust the height as needed
-            />
-          </li>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <div className="flex items-center">
+              <Link to="/" aria-label="Homepage">
+                <img
+                  src={Logo}
+                  alt="Subarashii Academy Logo"
+                  className="h-10 w-auto"
+                />
+              </Link>
+            </div>
 
-          {/* Navigation Items */}
-          <li className=" py-2 cursor-pointer relative group">
-            <span className="relative ">
-              <Link to="/">Home</Link>
-            </span>
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 ease-in-out group-hover:w-full"></span>
-          </li>
-          <li className=" py-2 cursor-pointer relative group">
-            <NavLink to="/about" className="relative ">
-              About Us
-            </NavLink>
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 ease-in-out group-hover:w-full"></span>
-          </li>
-          <li className=" py-2 cursor-pointer relative group">
-            <span className="relative ">Services</span>
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 ease-in-out group-hover:w-full"></span>
-          </li>
-          <li className=" py-2 cursor-pointer relative group">
-            <NavLink to="/location" className="relative ">
-              Location
-            </NavLink>
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 ease-in-out group-hover:w-full"></span>
-          </li>
+            {/* Hamburger for Mobile */}
+            <div className="md:hidden">
+              <button
+                onClick={toggleMenu}
+                className="text-gray-800 hover:text-black focus:outline-none"
+                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              >
+                {isMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+              </button>
+            </div>
 
-          {/* Search Icon */}
-          <li>
-            <i className="fa fa-fw fa-search cursor-pointer "></i>
-          </li>
-        </ul>
+            {/* Navigation Links */}
+            <ul
+              className={`md:flex items-center space-y-4 md:space-y-0 md:space-x-8 absolute md:static bg-white md:bg-transparent w-full md:w-auto top-16 left-0 md:top-0 text-center md:text-left transition-all duration-300 ease-in-out ${
+                isMenuOpen ? "block p-4 shadow-md" : "hidden md:flex"
+              }`}
+            >
+              <li>
+                <NavLink
+                  to="/"
+                  className="text-gray-800 hover:text-blue-600 font-medium transition-colors duration-200"
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/about"
+                  className="text-gray-800 hover:text-blue-600 font-medium transition-colors duration-200"
+                >
+                  About Us
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/services"
+                  className="text-gray-800 hover:text-blue-600 font-medium transition-colors duration-200"
+                >
+                  Services
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/location"
+                  className="text-gray-800 hover:text-blue-600 font-medium transition-colors duration-200"
+                >
+                  Location
+                </NavLink>
+              </li>
+              <li>
+                <button
+                  aria-label="Search"
+                  className="text-gray-800 hover:text-blue-600 transition-colors duration-200"
+                >
+                  <FaSearch />
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
       </nav>
-    </div>
+    </header>
   );
 }
