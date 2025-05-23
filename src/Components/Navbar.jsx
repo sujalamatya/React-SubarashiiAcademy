@@ -92,14 +92,14 @@ export default function Navbar() {
                   Location
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <button
                   aria-label="Search"
                   className="text-gray-800 hover:text-blue-600 transition-colors duration-200"
                 >
                   <FaSearch />
                 </button>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
