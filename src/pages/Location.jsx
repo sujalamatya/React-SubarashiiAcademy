@@ -1,106 +1,158 @@
 import React from "react";
-import Navbar from "../Components/Navbar.jsx";
+import Navbar from "../Components/Navbar";
 import Locationimg from "../assets/loc.jpg";
+import {
+  FaClock,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaFacebook,
+  FaInstagram,
+} from "react-icons/fa";
 
 export default function Location() {
   return (
     <>
       <Navbar />
-      {/* Hero Section */}
-      <div
-        style={{ backgroundImage: `url(${Locationimg})` }}
-        className="relative h-80 md:h-[500px] bg-cover bg-center bg-no-repeat flex items-center justify-center"
-      >
-        <div className=" backdrop-blur-sm rounded-lg p-8 max-w-3xl text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">
-            Location
-          </h1>
-        </div>
-      </div>
 
-      {/* Description */}
-      <section className="max-w-4xl mx-auto mt-12 px-6 text-center md:text-left">
-        <p className="text-lg md:text-xl font-light text-gray-700 leading-relaxed">
-          Subarashii Educational Academy is located in Putalisadak-28,
-          Kathmandu.
-          <br />
-          Near Sankhar Dev Campus.
+      {/* ─── HERO ─────────────────────────────────────────────── */}
+      <section
+        className="relative h-[60vh] min-h-[320px] w-full bg-cover bg-center"
+        style={{ backgroundImage: `url(${Locationimg})` }}
+      >
+        {/* overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
+
+        <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 text-center">
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-wide text-white drop-shadow-lg">
+            Our&nbsp;Location
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg text-white/90">
+            Find us at the heart of Kathmandu—easy to reach, easier to stay
+            inspired.
+          </p>
+        </div>
+      </section>
+
+      {/* ─── DESCRIPTION ──────────────────────────────────────── */}
+      <section className="max-w-5xl mx-auto px-6 py-12">
+        <p className="text-lg md:text-xl leading-relaxed text-center md:text-left text-gray-700">
+          Subarashii Educational Academy is located in Putalisadak‑28,
+          Kathmandu, near Shankar Dev Campus.
         </p>
       </section>
 
-      {/* Map + Info */}
-      <section className="flex flex-col md:flex-row max-w-6xl mx-auto mt-16 px-6 gap-12">
+      {/* ─── MAP + INFO ───────────────────────────────────────── */}
+      <section className="max-w-6xl mx-auto grid gap-12 px-6 pb-20 lg:grid-cols-2">
         {/* Map */}
-        <div className="md:w-1/2 rounded-lg overflow-hidden shadow-lg h-[400px] md:h-[500px]">
+        <div className="overflow-hidden rounded-2xl shadow-xl ring-1 ring-gray-200">
           <iframe
-            title="Subarashii Education Academy Location"
-            src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=27%C2%B042'10.1%22N%2085%C2%B019'20.5%22E+(Subarashii%20Education%20Academy)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-            width="100%"
-            height="100%"
-            allowFullScreen=""
+            title="Subarashii Educational Academy Map"
+            src="https://maps.google.com/maps?width=100%25&height=600&hl=en&q=27.7028,85.3223+(Subarashii%20Education%20Academy)&t=&z=16&ie=UTF8&iwloc=B&output=embed"
+            className="w-full h-[400px] lg:h-full border-0"
             loading="lazy"
-            className="border-0"
-          ></iframe>
+          />
         </div>
 
-        {/* Contact Info */}
-        <div className="md:w-1/2 flex flex-col justify-center space-y-6">
+        {/* Info */}
+        <div className="flex flex-col justify-center space-y-8">
           <h2 className="text-3xl font-semibold text-gray-900">
             Subarashii Education Academy
           </h2>
 
-          <div>
-            <h3 className="font-semibold text-lg text-gray-800">
-              Working Days
-            </h3>
-            <p className="text-gray-700">Sunday - Friday</p>
-            <p className="text-gray-700">9am - 6pm</p>
-          </div>
+          <InfoLine
+            icon={<FaClock className="text-blue-600" />}
+            title="Working Days"
+            content={
+              <>
+                Sunday – Friday
+                <br />
+                9 AM – 6 PM
+              </>
+            }
+          />
 
-          <div>
-            <h3 className="font-semibold text-lg text-gray-800">Address</h3>
-            <p className="text-gray-700">Putalisadak, Kathmandu, Nepal</p>
-            <a
-              href="https://www.google.com/maps/@27.7028833,85.3224453,3a,66.4y,277.28h,99.53t/data=!3m8!1e1!3m6!1sAF1QipNL8v34P8_XFfkMBa68JyRbpBJ_90OgbnmCHBzi!2e10!3e11!6s%2F%2Flh5.ggpht.com%2Fp%2FAF1QipNL8v34P8_XFfkMBa68JyRbpBJ_90OgbnmCHBzi%3Dw900-h600-k-no-pi-9.534742921072151-ya92.60058655006819-ro0-fo100!7i4096!8i2048?entry=ttu&g_ep=EgoyMDI0MTEwNi4wIKXMDSoASAFQAw%3D%3D"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:text-red-600 underline"
-            >
-              Street View
-            </a>
-          </div>
+          <InfoLine
+            icon={<FaMapMarkerAlt className="text-blue-600" />}
+            title="Address"
+            content="Putalisadak, Kathmandu, Nepal"
+            link={{
+              href: "https://www.google.com/maps/@27.7028833,85.3224453,3a,66.4y,277.28h,99.53t/data=!3m8!1e1!3m6!1sAF1QipNL8v34P8_XFfkMBa68JyRbpBJ_90OgbnmCHBzi",
+              label: "Street View",
+            }}
+          />
 
-          <div>
-            <h3 className="font-semibold text-lg text-gray-800">Contact</h3>
-            <p className="text-gray-700">9851197011</p>
-            <p className="text-gray-700">01-4216164</p>
-          </div>
+          <InfoLine
+            icon={<FaPhoneAlt className="text-blue-600" />}
+            title="Contact"
+            content={
+              <>
+                9851197011
+                <br />
+                01‑4216164
+              </>
+            }
+          />
 
-          <div className="flex space-x-6">
-            <a
+          <InfoLine
+            icon={<FaEnvelope className="text-blue-600" />}
+            title="Email"
+            content="subarashii22@gmail.com"
+          />
+
+          <div className="flex space-x-6 pt-4">
+            <SocialLink
               href="https://www.facebook.com/SubarashiiEducationalAcademy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:text-red-600 underline"
-            >
-              Facebook
-            </a>
-            <a
+              label="Facebook"
+              icon={<FaFacebook />}
+            />
+            <SocialLink
               href="https://www.instagram.com/subarashiieducationalacademy/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:text-red-600 underline"
-            >
-              Instagram
-            </a>
-          </div>
-
-          <div>
-            <h3 className="font-semibold text-lg text-gray-800">Email</h3>
-            <p className="text-gray-700">subarashii22@gmail.com</p>
+              label="Instagram"
+              icon={<FaInstagram />}
+            />
           </div>
         </div>
       </section>
     </>
+  );
+}
+
+/* ─── Helper Components ────────────────────────────────────── */
+
+function InfoLine({ icon, title, content, link }) {
+  return (
+    <div className="flex items-start space-x-4">
+      <div className="mt-1">{icon}</div>
+      <div>
+        <h3 className="font-semibold text-lg text-gray-800">{title}</h3>
+        {link ? (
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-red-600 underline"
+          >
+            {link.label}
+          </a>
+        ) : (
+          <p className="text-gray-700">{content}</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function SocialLink({ href, label, icon }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className="text-2xl text-blue-600 hover:text-red-600 transition-colors"
+    >
+      {icon}
+    </a>
   );
 }
