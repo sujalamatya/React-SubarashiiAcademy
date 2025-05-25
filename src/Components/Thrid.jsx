@@ -45,7 +45,10 @@ export default function ServicesSection() {
             <p className="text-gray-700 text-base mb-6 leading-relaxed">
               {service.description}
             </p>
-            <button className="mt-auto px-5 py-2 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-md transition duration-300">
+            <button
+              onClick={() => {}}
+              className="mt-auto px-5 py-2 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-md transition duration-300"
+            >
               Learn More <i className="fa fa-arrow-right ml-2" />
             </button>
           </motion.div>
